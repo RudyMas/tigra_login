@@ -1,0 +1,29 @@
+{
+  "name": "tiger/login",
+  "description": "PHP Class Login for the Tiger Framework",
+  "type": "library",
+  "license": "GPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "Rudy Mas",
+      "email": "rudy.mas@rmsoft.be",
+      "homepage": "https://www.rmsoft.be/",
+      "role": "Developer"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">= 7.4",
+    "rudymas/pdo-ext": "^5",
+    "rudymas/manipulator": "^1",
+    "sonata-project/google-authenticator": "^2.3.1"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.6.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Tiger\\": "src/"
+    }
+  }
+}
