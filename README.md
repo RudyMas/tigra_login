@@ -1,16 +1,16 @@
-# PHP Class Login for the Tiger Framework
+# PHP Class Login for the Tigra Framework
 
-This is the Class Login which is used by Tiger.
+This is the Class Login which is used by Tigra.
 
 ## Installation
 Install the package using composer.
 ```
-composer require tiger/login
+composer require tigra/login
 ```
 
 or by editing composer.json yourself and adding:
 ```
 "require": {
-    "tiger/login": "*"
+    "tigra/login": "*"
 }
 ```

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tiger;
+namespace Tigra;
 
 use RudyMas\Manipulator\Text;
 use RudyMas\DBconnect;
@@ -10,7 +10,7 @@ use Sonata\GoogleAuthenticator\GoogleQrUrl;
 /**
  * Class Login (Version PHP 7.4)
  *
- * In the MySQL table 'tiger_users' you only need to add 6 fixed fields:
+ * In the MySQL table 'tigra_users' you only need to add 6 fixed fields:
  * - id             = int(11)       : Is the index for the table (auto_increment)
  * - username       = varchar(40)   : The login username
  * - email          = varchar(70)   : The login e-mail
@@ -34,7 +34,7 @@ use Sonata\GoogleAuthenticator\GoogleQrUrl;
  * @copyright 2022, rmsoft.be. (https://www.rmsoft.be/)
  * @license https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
  * @version 7.4.1.0
- * @package Tiger
+ * @package Tigra
  */
 class Login
 {
@@ -82,7 +82,7 @@ class Login
     public function loginUser(string $userLogin, string $password, bool $remember = false): bool
     {
         $query = "SELECT *
-                  FROM tiger_users
+                  FROM tigra_users
                   WHERE username = {$this->db->cleanSQL($userLogin)}";
         if ($this->emailLogin) {
             $query .= " OR email = {$this->db->cleanSQL($userLogin)}";
@@ -129,7 +129,7 @@ class Login
         }
         if ($userLogin != '' && $password != '') {
             $query = "SELECT * 
-                      FROM tiger_users
+                      FROM tigra_users
                       WHERE username = {$this->db->cleanSQL($userLogin)}";
             if ($this->emailLogin) {
                 $query .= " OR email = {$this->db->cleanSQL($userLogin)}";
@@ -210,7 +210,7 @@ class Login
             $this->data['access_level'] = '99';
         }
 
-        $query = "SELECT id FROM tiger_users";
+        $query = "SELECT id FROM tigra_users";
         if ($this->emailLogin) {
             $query .= " WHERE email = {$this->db->cleanSQL($this->data['email'])}";
         } else {
@@ -224,7 +224,7 @@ class Login
 
         $query = "SELECT COLUMN_NAME AS 'field'
                   FROM INFORMATION_SCHEMA.COLUMNS
-                  WHERE TABLE_NAME = 'tiger_users'
+                  WHERE TABLE_NAME = 'tigra_users'
                     AND TABLE_SCHEMA = (SELECT DATABASE())";
         $this->db->query($query);
         $numberOfFields = $this->db->rows;
@@ -233,7 +233,7 @@ class Login
             $nameField[$x] = $this->db->data['field'];
         }
 
-        $query = "INSERT INTO tiger_users (";
+        $query = "INSERT INTO tigra_users (";
         $query .= $nameField[1];
         for ($x = 2; $x < $numberOfFields; $x++) {
             $query .= ", ";
@@ -285,7 +285,7 @@ class Login
         } else {
             return false;
         }
-        $query = "UPDATE tiger_users SET ";
+        $query = "UPDATE tigra_users SET ";
         foreach ($this->data as $key => $value) {
             if ($key != 'id') {
                 $query .= "{$key} = {$this->db->cleanSQL($value)},";
@@ -328,7 +328,7 @@ class Login
      */
     public function resetPassword(string $login)
     {
-        $query = "SELECT * FROM tiger_users";
+        $query = "SELECT * FROM tigra_users";
         if ($this->emailLogin) {
             $query .= " WHERE Email = {$this->db->cleanSQL($login)}";
         } else {
@@ -352,7 +352,7 @@ class Login
     public function createNewPassword(string $remember_me, string $password): void
     {
         $query = "SELECT *
-                  FROM tiger_users
+                  FROM tigra_users
                   WHERE remember_me = {$this->db->cleanSQL($remember_me)}";
         $this->db->queryRow($query);
         $this->translateData();
